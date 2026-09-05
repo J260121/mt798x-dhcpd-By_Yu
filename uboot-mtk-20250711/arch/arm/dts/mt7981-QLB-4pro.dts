@@ -7,7 +7,7 @@
 / {
 	#address-cells = <1>;
 	#size-cells = <1>;
-	model = "mt7981-cmcc-xr30";
+	model = "mt7981-QLB-4pro";
 	compatible = "mediatek,mt7981", "mediatek,mt7981-rfb";
 
 	chosen {
