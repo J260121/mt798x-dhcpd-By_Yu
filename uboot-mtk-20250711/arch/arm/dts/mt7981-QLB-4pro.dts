@@ -49,30 +49,6 @@
 			gpios = <&pio 0 GPIO_ACTIVE_LOW>;
 		};
 	};
-	pwmleds {
-		compatible = "pwm-leds";
-
-		wan {
-			label = "wan";
-			pwms = <0x1e 0x00 0x3e8 0x64>;
-			max-brightness = <0xff>;
-			linux,default-trigger = "default-on";
-		};
-
-		internet {
-			label = "internet";
-			pwms = <0x1e 0x02 0x3e8 0x64>;
-			max-brightness = <0xff>;
-			linux,default-trigger = "default-on";
-		};
-
-		wps {
-			label = "wpsled";
-			pwms = <0x1e 0x01 0x3e8 0x64>;
-			max-brightness = <0xff>;
-			linux,default-trigger = "none";
-		};
-	};
 	leds {
 		compatible = "gpio-leds";
 
