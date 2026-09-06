@@ -21,19 +21,19 @@
 		layout@1 {
 			label = "mod-112m";
 			mtdids = "nmbm0=nmbm0";
-			mtdparts = "1024k(bl2),512k(u-boot-env),2048k(factory),256k(bdinfo),2048k(fip),114688k(ubi)";
+			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),256k(bdinfo),2048k(fip),114688k(ubi)";
 		};
 		
 		layout@2 {
 			label = "mod-240m";
 			mtdids = "nmbm0=nmbm0";
-			mtdparts = "1024k(bl2),512k(u-boot-env),2048k(factory),256k(bdinfo),2048k(fip),245760k(ubi)";
+			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),256k(bdinfo),2048k(fip),245760k(ubi)";
 		};
 		
 		layout@3 {
 			label = "mod-490m";
 			mtdids = "nmbm0=nmbm0";
-			mtdparts = "1024k(bl2),512k(u-boot-env),2048k(Factory),256k(bdinfo),2048k(fip),501760k(ubi)";
+			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(Factory),256k(bdinfo),2048k(fip),501760k(ubi)";
 		};
 	};
 	chosen {
