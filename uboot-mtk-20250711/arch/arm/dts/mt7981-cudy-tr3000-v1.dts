@@ -47,6 +47,12 @@
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(Factory),256k(bdinfo),2048k(fip),501760k(ubi)";
 		};
+
+		layout@6 {
+			label = "PGY-1Pro";
+			mtdids = "nmbm0=nmbm0";
+			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(factory),2048k(fip),512k(bdinfo),2048k(kpanic),56m(ubi_0),56m(ubi_1)";
+		};
 	};
 	chosen {
 		stdout-path = &uart0;
