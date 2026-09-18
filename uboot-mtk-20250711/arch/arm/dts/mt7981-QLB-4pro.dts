@@ -49,21 +49,27 @@
 			gpios = <&pio 0 GPIO_ACTIVE_LOW>;
 		};
 	};
-	leds {
+	gpio-leds {
 		compatible = "gpio-leds";
 
 		led-0 {
-			label = "red:system";
-			gpios = <&pio 35 GPIO_ACTIVE_LOW>;
+			label = "white:wan";
+			gpios = <0x0f 0x0d 0x01>;
+			phandle = <0x4d>;
 		};
 
 		led-1 {
-			label = "white:system";
-			gpios = <&pio 34 GPIO_ACTIVE_LOW>;
+			label = "white:internet";
+			gpios = <0x0f 0x07 0x01>;
+			phandle = <0x4e>;
 		};
 
+		led-2 {
+			label = "white:wps";
+			gpios = <0x0f 0x0f 0x01>;
+			phandle = <0x4f>;
+		};
 	};
-
 	memory@40000000 {
 		device_type = "memory";
 		reg = <0x40000000 0x20000000>;
