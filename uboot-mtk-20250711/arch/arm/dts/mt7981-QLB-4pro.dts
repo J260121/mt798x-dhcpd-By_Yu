@@ -40,14 +40,14 @@
 			label = "wan";
 			pwms = <0x1e 0x00 0x3e8 0x64>;
 			max-brightness = <0xff>;
-			linux,default-trigger = "default-on";
+			linux,default-trigger = "heartbeat";
 		};
 
 		internet {
 			label = "internet";
 			pwms = <0x1e 0x02 0x3e8 0x64>;
 			max-brightness = <0xff>;
-			linux,default-trigger = "default-on";
+			linux,default-trigger = "netdev";
 		};
 
 		wps {
