@@ -31,82 +31,32 @@
 	};
 	config {
 		bootcmd = "mtkboardboot";
+		blink_led = "red:system";
+		system_led = "white:system";
 	};
 
 
+	gpio-leds {
+		compatible = "gpio-leds";
 
-
-	pwm@10048000 {
-		compatible = "mediatek,mt7981-pwm";
-		reg = <0x00 0x10048000 0x00 0x1000>;
-		#pwm-cells = <0x02>;
-		clocks = <0x02 0x0d 0x02 0x0c 0x02 0x0e 0x02 0x0f 0x02 0x10>;
-		clock-names = "top\0main\0pwm1\0pwm2\0pwm3";
-		pinctrl-names = "default";
-		pinctrl-0 = <0x03 0x04 0x05>;
-		status = "okay";
-		phandle = <0x1e>;
-	};
-	pwm0-pin-g0 {
-			phandle = <0x03>;
-
-			mux {
-				function = "pwm";
-				groups = "pwm0_0";
-			};
+		led-0 {
+			label = "white:wan";
+			gpios = <0x0f 0x0d 0x01>;
+			phandle = <0x4d>;
 		};
 
-	pwm1-pin-g0 {
-		phandle = <0x04>;
+		led-1 {
+			label = "white:internet";
+			gpios = <0x0f 0x07 0x01>;
+			phandle = <0x4e>;
+		};
 
-		mux {
-			function = "pwm";
-			groups = "pwm1_1";
+		led-2 {
+			label = "white:wps";
+			gpios = <0x0f 0x0f 0x01>;
+			phandle = <0x4f>;
 		};
 	};
-
-	pwm2-pin {
-		phandle = <0x05>;
-
-		mux {
-			function = "pwm";
-			groups = "pwm2";
-		};
-	};
-
-	pwm1-pin-14 {
-
-		mux {
-			function = "gpio";
-			groups = "pwm1_0";
-		};
-	};
-
-	pwmleds {
-		compatible = "pwm-leds";
-
-		wan {
-			label = "wan";
-			pwms = <0x1e 0x00 0x3e8 0x64>;
-			max-brightness = <0xff>;
-			linux,default-trigger = "heartbeat";
-		};
-
-		internet {
-			label = "internet";
-			pwms = <0x1e 0x02 0x3e8 0x64>;
-			max-brightness = <0xff>;
-			linux,default-trigger = "netdev";
-		};
-
-		wps {
-			label = "wpsled";
-			pwms = <0x1e 0x01 0x3e8 0x64>;
-			max-brightness = <0xff>;
-			linux,default-trigger = "none";
-		};
-	};
-
 
 
 	memory@40000000 {
