@@ -30,41 +30,34 @@
 	};
 	config {
 		bootcmd = "mtkboardboot";
-		blink_led = "white:internet";
-		system_led = "white:wps";
+		blink_led = "internet";
+		system_led = "wpsled";
 	};
 
+	pwmleds {
+		compatible = "pwm-leds";
 
-pwm-leds {
-    compatible = "pwm-leds";
-    
-    led-0 {
-        label = "white:wan";
-        /* 
-         * pwms 格式: <&pwm_controller channel period_ns polarity>
-         * &pwm0: 引用 PWM 控制器节点
-         * 0: 通道号
-         * 1000000: 周期为 1,000,000 纳秒 (即 1kHz 频率)
-         * PWM_POLARITY_NORMAL: 正常极性 (高电平有效)
-         */
-        pwms = <&pwm0 0 1000000 PWM_POLARITY_NORMAL>;
-        max-brightness = <255>; /* 可选：最大亮度值 */
-    };
+		wan {
+			label = "wan";
+			pwms = <0x1e 0x00 0x3e8 0x64>;
+			max-brightness = <0xff>;
+			linux,default-trigger = "default-on";
+		};
 
-    led-1 {
-        label = "white:internet";
-        pwms = <&pwm0 1 1000000 PWM_POLARITY_NORMAL>;
-        max-brightness = <255>;
-    };
+		internet {
+			label = "internet";
+			pwms = <0x1e 0x02 0x3e8 0x64>;
+			max-brightness = <0xff>;
+			linux,default-trigger = "default-on";
+		};
 
-    led-2 {
-        label = "white:wps";
-        /* 假设 WPS 使用另一个 PWM 控制器 pwm1 */
-        pwms = <&pwm1 0 1000000 PWM_POLARITY_NORMAL>;
-        max-brightness = <255>;
-    };
-};
-
+		wps {
+			label = "wpsled";
+			pwms = <0x1e 0x01 0x3e8 0x64>;
+			max-brightness = <0xff>;
+			linux,default-trigger = "none";
+		};
+	};
 
 
 	memory@40000000 {
