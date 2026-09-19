@@ -39,22 +39,22 @@
 
 		wan {
 			label = "wan";
-			pwms = <&pwm 0x01 0x3e8 0x64>;
-			max-brightness = <0xff>;
+            pwms = <&pwm 0 1000000 0>;
+            max-brightness = <255>;
 			linux,default-trigger = "default-on";
 		};
 
 		internet {
 			label = "internet";
-			pwms = <&pwm 0x02 0x3e8 0x64>;
-			max-brightness = <0xff>;
+            pwms = <&pwm 1 1000000 0>;
+            max-brightness = <255>;
 			linux,default-trigger = "default-on";
 		};
 
 		wps {
 			label = "wpsled";
-			pwms = <&pwm 0x03 0x3e8 0x64>;
-			max-brightness = <0xff>;
+            pwms = <&pwm 2 1000000 0>;
+            max-brightness = <255>;
 			linux,default-trigger = "none";
 		};
 	};
@@ -105,6 +105,36 @@
 			bias-pull-down = <MTK_PUPD_SET_R1R0_11>;
 		};
 	};
+    /* WAN LED - PWM 通道 0 */
+    pwm0_pins: pwm0-pins {
+        mux {
+            function = "pwm";
+            /* 
+             * 重要：请根据 mt7981-pinfunc.dtsi 确认具体的 group 名称。
+             * MT7981 常见的 PWM 引脚组命名可能是 "pwm_0", "pwm_ch0" 等。
+             * 此处假设通道 0 对应 group "pwm_0"，请根据实际情况修改。
+             */
+            groups = "pwm_0"; 
+        };
+    };
+
+    /* Internet LED - PWM 通道 1 */
+    pwm1_pins: pwm1-pins {
+        mux {
+            function = "pwm";
+            /* 假设通道 1 对应 group "pwm_1" */
+            groups = "pwm_1";
+        };
+    };
+
+    /* WPS LED - PWM 通道 2 */
+    pwm2_pins: pwm2-pins {
+        mux {
+            function = "pwm";
+            /* 假设通道 2 对应 group "pwm_2" */
+            groups = "pwm_2";
+        };
+    };
 };
 
 &spi0 {
@@ -130,38 +160,12 @@
 
 /* 2. 启用 PWM 控制器并关联引脚 */
 &pwm {
-    status = "okay";
+   status = "okay";
     pinctrl-names = "default";
-    /* 引用下面定义的引脚组标签 */
+    /* 引用下面定义的引脚组 */
     pinctrl-0 = <&pwm0_pins>, <&pwm1_pins>, <&pwm2_pins>;
 };
 
-/* 3. 在 pinctrl 节点下定义引脚复用 */
-&pinctrl {
-    /* PWM 通道 0 引脚配置 */
-    pwm0_pins: pwm0-pins {
-        mux {
-            function = "pwm";
-            groups = "pwm1"; /* 请根据 mt7981-pinfunc.dtsi 确认具体 group 名称 */
-        };
-    };
-
-    /* PWM 通道 1 引脚配置 */
-    pwm1_pins: pwm1-pins {
-        mux {
-            function = "pwm";
-            groups = "pwm2"; /* 请根据 mt7981-pinfunc.dtsi 确认具体 group 名称 */
-        };
-    };
-
-    /* PWM 通道 2 引脚配置 */
-    pwm2_pins: pwm2-pins {
-        mux {
-            function = "pwm";
-            groups = "pwm3"; /* 请根据 mt7981-pinfunc.dtsi 确认具体 group 名称 */
-        };
-    };
-};
 
 &watchdog {
 	status = "disabled";
