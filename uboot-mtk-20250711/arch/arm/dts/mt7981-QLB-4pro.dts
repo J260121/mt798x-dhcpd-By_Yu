@@ -33,6 +33,55 @@
 		bootcmd = "mtkboardboot";
 	};
 
+
+
+
+	pwm@10048000 {
+		compatible = "mediatek,mt7981-pwm";
+		reg = <0x00 0x10048000 0x00 0x1000>;
+		#pwm-cells = <0x02>;
+		clocks = <0x02 0x0d 0x02 0x0c 0x02 0x0e 0x02 0x0f 0x02 0x10>;
+		clock-names = "top\0main\0pwm1\0pwm2\0pwm3";
+		pinctrl-names = "default";
+		pinctrl-0 = <0x03 0x04 0x05>;
+		status = "okay";
+		phandle = <0x1e>;
+	};
+	pwm0-pin-g0 {
+			phandle = <0x03>;
+
+			mux {
+				function = "pwm";
+				groups = "pwm0_0";
+			};
+		};
+
+	pwm1-pin-g0 {
+		phandle = <0x04>;
+
+		mux {
+			function = "pwm";
+			groups = "pwm1_1";
+		};
+	};
+
+	pwm2-pin {
+		phandle = <0x05>;
+
+		mux {
+			function = "pwm";
+			groups = "pwm2";
+		};
+	};
+
+	pwm1-pin-14 {
+
+		mux {
+			function = "gpio";
+			groups = "pwm1_0";
+		};
+	};
+
 	pwmleds {
 		compatible = "pwm-leds";
 
@@ -57,6 +106,8 @@
 			linux,default-trigger = "none";
 		};
 	};
+
+
 
 	memory@40000000 {
 		device_type = "memory";
