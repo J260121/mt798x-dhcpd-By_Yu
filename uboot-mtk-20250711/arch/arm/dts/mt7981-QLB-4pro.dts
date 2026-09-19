@@ -3,7 +3,6 @@
 /dts-v1/;
 #include "mt7981.dtsi"
 #include <dt-bindings/gpio/gpio.h>
-#include <dt-bindings/pwm/pwm.h>
 
 / {
 	#address-cells = <1>;
@@ -31,7 +30,7 @@
 	};
 	config {
 		bootcmd = "mtkboardboot";
-		blink_led = "red:system";
+		blink_led = "white:internet";
 		system_led = "white:system";
 	};
 
@@ -41,20 +40,17 @@
 
 		led-0 {
 			label = "white:wan";
-			gpios = <0x0f 0x0d 0x01>;
-			phandle = <0x4d>;
+			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
 		};
 
 		led-1 {
 			label = "white:internet";
-			gpios = <0x0f 0x07 0x01>;
-			phandle = <0x4e>;
+			gpios = <&gpio 7 GPIO_ACTIVE_HIGH>;
 		};
 
 		led-2 {
-			label = "white:wps";
-			gpios = <0x0f 0x0f 0x01>;
-			phandle = <0x4f>;
+			label = "white:system";
+			gpios = <&gpio 15 GPIO_ACTIVE_HIGH>;
 		};
 	};
 
