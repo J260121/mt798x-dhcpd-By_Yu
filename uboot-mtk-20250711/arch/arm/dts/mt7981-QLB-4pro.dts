@@ -31,7 +31,7 @@
 	config {
 		bootcmd = "mtkboardboot";
 		blink_led = "white:internet";
-		system_led = "white:wps";
+		system_led = "white:wan";
 	};
 
 	leds {
