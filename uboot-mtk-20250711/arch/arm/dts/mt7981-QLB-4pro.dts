@@ -129,7 +129,7 @@
 	};
 };
 
-&pwm0 {
+&pwm {
     status = "okay";
     pinctrl-names = "default";
     pinctrl-0 = <&pwm0_pins>; /* 确保引脚复用为 PWM 功能 */
