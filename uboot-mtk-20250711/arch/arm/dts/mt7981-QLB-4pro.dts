@@ -39,51 +39,25 @@
 
 		wan {
 			label = "wan";
-			pwms = <0x1e 0x00 0x3e8 0x64>;
+			pwms = <&pwm 0x01 0x3e8 0x64>;
 			max-brightness = <0xff>;
 			linux,default-trigger = "default-on";
 		};
 
 		internet {
 			label = "internet";
-			pwms = <0x1e 0x02 0x3e8 0x64>;
+			pwms = <&pwm 0x02 0x3e8 0x64>;
 			max-brightness = <0xff>;
 			linux,default-trigger = "default-on";
 		};
 
 		wps {
 			label = "wpsled";
-			pwms = <0x1e 0x01 0x3e8 0x64>;
+			pwms = <&pwm 0x03 0x3e8 0x64>;
 			max-brightness = <0xff>;
 			linux,default-trigger = "none";
 		};
 	};
-		pwm0-pin-g0 {
-			phandle = <0x03>;
-
-			mux {
-				function = "pwm";
-				groups = "pwm0_0";
-			};
-		};
-
-		pwm1-pin-g0 {
-			phandle = <0x04>;
-
-			mux {
-				function = "pwm";
-				groups = "pwm1_1";
-			};
-		};
-
-		pwm2-pin {
-			phandle = <0x05>;
-
-			mux {
-				function = "pwm";
-				groups = "pwm2";
-			};
-		};
 
 	memory@40000000 {
 		device_type = "memory";
@@ -154,10 +128,39 @@
 	};
 };
 
+/* 2. 启用 PWM 控制器并关联引脚 */
 &pwm {
     status = "okay";
     pinctrl-names = "default";
-    pinctrl-0 = <0x03 0x04 0x05>;
+    /* 引用下面定义的引脚组标签 */
+    pinctrl-0 = <&pwm0_pins>, <&pwm1_pins>, <&pwm2_pins>;
+};
+
+/* 3. 在 pinctrl 节点下定义引脚复用 */
+&pinctrl {
+    /* PWM 通道 0 引脚配置 */
+    pwm0_pins: pwm0-pins {
+        mux {
+            function = "pwm";
+            groups = "pwm1"; /* 请根据 mt7981-pinfunc.dtsi 确认具体 group 名称 */
+        };
+    };
+
+    /* PWM 通道 1 引脚配置 */
+    pwm1_pins: pwm1-pins {
+        mux {
+            function = "pwm";
+            groups = "pwm2"; /* 请根据 mt7981-pinfunc.dtsi 确认具体 group 名称 */
+        };
+    };
+
+    /* PWM 通道 2 引脚配置 */
+    pwm2_pins: pwm2-pins {
+        mux {
+            function = "pwm";
+            groups = "pwm3"; /* 请根据 mt7981-pinfunc.dtsi 确认具体 group 名称 */
+        };
+    };
 };
 
 &watchdog {
