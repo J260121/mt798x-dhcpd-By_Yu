@@ -132,8 +132,51 @@
 &pwm {
     status = "okay";
     pinctrl-names = "default";
-    pinctrl-0 = <&pwm0_pins>; /* 确保引脚复用为 PWM 功能 */
+    /* 引用下面定义的引脚组标签 */
+    pinctrl-0 = <0x03 0x04 0x05>;
 };
+
+/* 3. 在 pinctrl 节点下定义引脚复用 */
+	&pinctrl {
+		compatible = "mediatek,mt7981-pinctrl";
+		reg = <0x00 0x11d00000 0x00 0x1000 0x00 0x11c00000 0x00 0x1000 0x00 0x11c10000 0x00 0x1000 0x00 0x11d20000 0x00 0x1000 0x00 0x11e00000 0x00 0x1000 0x00 0x11e20000 0x00 0x1000 0x00 0x11f00000 0x00 0x1000 0x00 0x11f10000 0x00 0x1000 0x00 0x1000b000 0x00 0x1000>;
+		reg-names = "gpio_base\0iocfg_rt_base\0iocfg_rm_base\0iocfg_rb_base\0iocfg_lb_base\0iocfg_bl_base\0iocfg_tm_base\0iocfg_tl_base\0eint";
+		gpio-controller;
+		#gpio-cells = <0x02>;
+		gpio-ranges = <0x0f 0x00 0x00 0x38>;
+		interrupt-controller;
+		interrupts = <0x00 0xe1 0x04>;
+		interrupt-parent = <0x01>;
+		#interrupt-cells = <0x02>;
+		phandle = <0x0f>;
+
+		pwm0-pin-g0 {
+			phandle = <0x03>;
+
+			mux {
+				function = "pwm";
+				groups = "pwm0_0";
+			};
+		};
+
+		pwm1-pin-g0 {
+			phandle = <0x04>;
+
+			mux {
+				function = "pwm";
+				groups = "pwm1_1";
+			};
+		};
+
+		pwm2-pin {
+			phandle = <0x05>;
+
+			mux {
+				function = "pwm";
+				groups = "pwm2";
+			};
+		};
+	};
 
 &watchdog {
 	status = "disabled";
