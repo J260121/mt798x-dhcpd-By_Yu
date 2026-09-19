@@ -31,28 +31,40 @@
 	config {
 		bootcmd = "mtkboardboot";
 		blink_led = "white:internet";
-		system_led = "white:system";
+		system_led = "white:wps";
 	};
 
 
-	gpio-leds {
-		compatible = "gpio-leds";
+pwm-leds {
+    compatible = "pwm-leds";
+    
+    led-0 {
+        label = "white:wan";
+        /* 
+         * pwms 格式: <&pwm_controller channel period_ns polarity>
+         * &pwm0: 引用 PWM 控制器节点
+         * 0: 通道号
+         * 1000000: 周期为 1,000,000 纳秒 (即 1kHz 频率)
+         * PWM_POLARITY_NORMAL: 正常极性 (高电平有效)
+         */
+        pwms = <&pwm0 0 1000000 PWM_POLARITY_NORMAL>;
+        max-brightness = <255>; /* 可选：最大亮度值 */
+    };
 
-		led-0 {
-			label = "white:wan";
-			gpios = <&pio 13 GPIO_ACTIVE_HIGH>;
-		};
+    led-1 {
+        label = "white:internet";
+        pwms = <&pwm0 1 1000000 PWM_POLARITY_NORMAL>;
+        max-brightness = <255>;
+    };
 
-		led-1 {
-			label = "white:internet";
-			gpios = <&pio 7 GPIO_ACTIVE_HIGH>;
-		};
+    led-2 {
+        label = "white:wps";
+        /* 假设 WPS 使用另一个 PWM 控制器 pwm1 */
+        pwms = <&pwm1 0 1000000 PWM_POLARITY_NORMAL>;
+        max-brightness = <255>;
+    };
+};
 
-		led-2 {
-			label = "white:system";
-			gpios = <&pio 15 GPIO_ACTIVE_HIGH>;
-		};
-	};
 
 
 	memory@40000000 {
@@ -122,6 +134,12 @@
 		reg = <0>;
 		spi-max-frequency = <52000000>;
 	};
+};
+
+&pwm0 {
+    status = "okay";
+    pinctrl-names = "default";
+    pinctrl-0 = <&pwm0_pins>; /* 确保引脚复用为 PWM 功能 */
 };
 
 &watchdog {
