@@ -3,7 +3,7 @@
 /dts-v1/;
 #include "mt7981.dtsi"
 #include <dt-bindings/gpio/gpio.h>
-
+#include <dt-bindings/pwm/pwm.h>
 / {
 	#address-cells = <1>;
 	#size-cells = <1>;
