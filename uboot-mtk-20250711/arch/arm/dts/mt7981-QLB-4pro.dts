@@ -40,17 +40,17 @@
 
 		led-0 {
 			label = "white:wan";
-			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
+			gpios = <&pio 13 GPIO_ACTIVE_HIGH>;
 		};
 
 		led-1 {
 			label = "white:internet";
-			gpios = <&gpio 7 GPIO_ACTIVE_HIGH>;
+			gpios = <&pio 7 GPIO_ACTIVE_HIGH>;
 		};
 
 		led-2 {
 			label = "white:system";
-			gpios = <&gpio 15 GPIO_ACTIVE_HIGH>;
+			gpios = <&pio 15 GPIO_ACTIVE_HIGH>;
 		};
 	};
 
