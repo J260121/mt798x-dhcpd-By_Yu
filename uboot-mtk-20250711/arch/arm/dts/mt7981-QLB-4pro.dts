@@ -34,22 +34,39 @@
 		system_led = "white:wan";
 	};
 
+
+	gpio-keys {
+		compatible = "gpio-keys";
+
+		reset-button {
+			label = "reset";
+			linux,code = <KEY_RESTART>;
+			gpios = <&pio 1 GPIO_ACTIVE_LOW>;
+		};
+
+		mesh-button {
+			label = "mesh";
+			linux,code = <BTN_9>;
+			gpios = <&pio 0 GPIO_ACTIVE_LOW>;
+		};
+	};
+
 	leds {
 		compatible = "gpio-leds";
 
 		led-0 {
-			label = "white:wan";
-			gpios = <&pio 13 GPIO_ACTIVE_LOW>;
+			label = "red:system";
+			gpios = <&pio 35 GPIO_ACTIVE_LOW>;
 		};
 
 		led-1 {
-			label = "white:internet";
-			gpios = <&pio 15 GPIO_ACTIVE_LOW>;
+			label = "green:system";
+			gpios = <&pio 9 GPIO_ACTIVE_LOW>;
 		};
 
 		led-2 {
-			label = "white:wps";
-			gpios = <&pio 7 GPIO_ACTIVE_LOW>;
+			label = "blue:system";
+			gpios = <&pio 12 GPIO_ACTIVE_LOW>;
 		};
 	};
 
