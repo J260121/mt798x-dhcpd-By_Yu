@@ -30,39 +30,37 @@
 	gpio-keys {
 		compatible = "gpio-keys";
 
-		reset-button {
+		button-mesh {
+			label = "mesh";
+			linux,code = <BTN_9>;
+			gpios = <&pio 10 GPIO_ACTIVE_LOW>;
+		};
+
+		button-reset {
 			label = "reset";
 			linux,code = <KEY_RESTART>;
-			gpios = <&pio 7 GPIO_ACTIVE_LOW>;
+			gpios = <&pio 9 GPIO_ACTIVE_LOW>;
 		};
-
-		mesh-button {
-			label = "mesh";
-			linux,code = <KEY_WPS_BUTTON>;
-			gpios = <&pio 15 GPIO_ACTIVE_LOW>;
-		};
-
 	};
 
 	gpio-leds {
 		compatible = "gpio-leds";
 
-		led_green: led-0 {
- 			label = "green:status";
- 			gpios = <&pio 1 GPIO_ACTIVE_LOW>;
- 		};
+		led-0 {
+			label = "blue:status";
+			gpios = <&pio 2 GPIO_ACTIVE_HIGH>;
+		};
 
- 		led_blue: led-1 {
- 			label = "blue:status";
- 			gpios = <&pio 2 GPIO_ACTIVE_LOW>;
- 		};
- 			
-		led_red: led-2 {
- 			label = "red:status";
-			gpios = <&pio 21 GPIO_ACTIVE_LOW>;
- 		};
+		red_led: led-1 {
+			label = "red:status";
+			gpios = <&pio 15 GPIO_ACTIVE_HIGH>;
+		};
+
+		green_led: led-2 {
+			label = "green:status";
+			gpios = <&pio 1 GPIO_ACTIVE_LOW>;
+		};
 	};
-
 
 	reg_1p8v: regulator-1p8v {
 		compatible = "regulator-fixed";
@@ -91,7 +89,7 @@
 	status = "okay";
 	mediatek,gmac-id = <0>;
 	phy-mode = "2500base-x";
-	mediatek,switch = "mt7531";
+	mediatek,switch = "auto";
 	reset-gpios = <&pio 5 GPIO_ACTIVE_HIGH>;
 
 	fixed-link {
@@ -113,7 +111,7 @@
 	status = "okay";
 };
 
-&pinctrl {
+&pio {
 	mmc0_pins_default: mmc0default {
 		mux {
 			function = "flash";
