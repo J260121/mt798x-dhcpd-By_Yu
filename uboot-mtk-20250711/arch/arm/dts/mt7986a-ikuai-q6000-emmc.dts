@@ -8,7 +8,7 @@
 / {
 	#address-cells = <1>;
 	#size-cells = <1>;
-	model = "ikuai Q6000-EMMC";
+	model = "ikuai-q6000-emmc";
 	compatible = "mediatek,mt7986", "mediatek,mt7986-rfb";
 
 	chosen {
